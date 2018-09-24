@@ -59,6 +59,11 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/money/withdraw','backend\WithdrawController@withdrawrecord');
 
 
+    //审核站长网站列表
+    Route::any('/backend/ads/verifylist','backend\WebsitesController@verifylist');
+    Route::any('/backend/ads/verifyweb/{web_id}','backend\WebsitesController@verifyweb')->where(['web_id' => '[0-9]+']);
+
+
 
 
 
