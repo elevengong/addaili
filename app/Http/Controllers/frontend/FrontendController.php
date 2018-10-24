@@ -18,16 +18,10 @@ class FrontendController extends Controller
     protected $showNum;
     protected $title;
 
-    public function __construct()
-    {
-        date_default_timezone_set('Asia/Shanghai');
-        $this->navigations = Navigation::select('id','nav_name','link','outlink')->where('status',1)->orderBy('priority','desc')->get()->toArray();
-        $this->contact = Contact::find(1)->toArray();
-        $this->lotterys = Lottery::select('l_id','lottery','photo','nickname')->where('status',1)->orderBy('priority','desc')->get()->toArray();
-        $this->showNum = 20;
-        $this->title = '六合彩票时时彩计划网';
-
-    }
+//    public function __construct()
+//    {
+//
+//    }
 
     protected function getPlanListByLid($l_id){
         $plan = Plan::select('p_id','plan_name')->where('l_id',$l_id)->where('status',1)->orderBy('priority','desc')->get()->toArray();

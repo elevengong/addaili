@@ -64,9 +64,6 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/ads/verifyweb/{web_id}','backend\WebsitesController@verifyweb')->where(['web_id' => '[0-9]+']);
 
 
-
-
-
     //图片上传
     Route::any('/backend/upload','backend\JobController@upload');
     Route::any('/backend/uploadphoto/{id}','MyController@uploadphoto');
@@ -74,13 +71,14 @@ Route::group(['middleware' => ['web','admin.login']],function () {
 
 
 //---------------------pc前端------------------------
-Route::get('/','frontend\HistoryController@index');
 
-Route::get('/history/{lottery_name}','frontend\HistoryController@index');
-Route::get('/plan/{lottery_name}/{p_id}','frontend\PlanController@index')->where(['p_id' => '[0-9]+']);
-
-
-Route::get('/test/{id}','frontend\TestController@index')->where(['id' => '[0-9]+']);
+//Route::any('/getadphoto/{uid}','frontend\IndexController@getAdPhoto')->where(['uid' => '[0-9]+']);
+//Route::any('/test','frontend\IndexController@test');
+//Route::group(['middleware' => ['cors']],function () {
+//
+//
+//
+//});
 
 //---------------------wap前端------------------------
 //Route::get('/m/','frontend\WapController@index');

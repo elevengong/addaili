@@ -13,8 +13,10 @@ class Kernel extends HttpKernel
      *
      * @var array
      */
+    //全局中间件
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+//        \App\Http\Middleware\Cors::class,  //ajax跨域的
     ];
 
     /**
@@ -28,13 +30,17 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,  //用来取消csrf验证的
         ],
+
 
         'api' => [
             \App\Http\Middleware\EncryptCookies::class,
+//            \App\Http\Middleware\Cors::class,
             'throttle:60,1',
         ],
+
+
     ];
 
     /**
@@ -51,5 +57,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin.login' => \App\Http\Middleware\AdminLogin::class,
+//        'cors' =>\App\Http\Middleware\Cors::class,
     ];
 }

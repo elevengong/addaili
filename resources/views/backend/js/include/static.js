@@ -107,7 +107,7 @@ function edit_static(set_id) {
     });
 }
 
-function edit_static(set_id) {
+function edit_static_handup(set_id) {
     var name  = $.trim( $('#name').val() );
     var nickname  = $.trim( $('#nickname').val() );
     var value = $.trim( $('#value').val() );
