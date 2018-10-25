@@ -112,7 +112,7 @@
             <dd style="display: none">
                 <ul>
                     <li><a data-href="{{url('/backend/ads/verifylist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="审核网站">审核网站</a></li>
-                    <li><a data-href="{{url('/backend/ads/index')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告竞价列表">广告竞价列表</a></li>
+                    <li><a data-href="{{url('/backend/ads/adslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告竞价列表">广告竞价列表</a></li>
                 </ul>
             </dd>
 

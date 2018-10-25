@@ -37,13 +37,22 @@ class WebsitesController extends MyController
     public function verifyweb(Request $request,$web_id){
         if($request->isMethod('post'))
         {
-
+            $status = request()->input('status');
+            $result = Websites::where('web_id', $web_id)->update(['status' => $status]);
+            if ($result) {
+                $data['status'] = 1;
+                $data['msg'] = "修改成功";
+            } else {
+                $data['status'] = 0;
+                $data['msg'] = "修改失败";
+            }
+            echo json_encode($data);
         }else{
             $WebsiteDetail = Websites::select('websites.*','member.name')
                 ->leftJoin('member',function ($join){
                     $join->on('member.member_id','=','websites.member_id');
                 })
-                ->where('websites.web_id')->get()->toArray();
+                ->where('websites.web_id',$web_id)->get()->toArray();
             return view('backend.viewverifywebsite', compact('WebsiteDetail'));
         }
 

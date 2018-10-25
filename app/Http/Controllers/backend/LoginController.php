@@ -16,6 +16,22 @@ class LoginController extends MyController
     public function login(Request $request){
         if($request->isMethod('post'))
         {
+            if($this->Ipbaimingdan == 1)
+            {
+                $loginIp = $request->getClientIp();
+//                $loginIp = '125.252.99.36';
+                $ipInfo = $this->getIpInfoByCurl($loginIp);
+//                print_r($ipInfo);
+                if($ipInfo['data']['country_id'] != 'PH')
+                {
+                    $data['status'] = 0;
+                    $data['msg'] = '你的ip没有通过白名单';
+                    echo json_encode($data);
+                    exit;
+                }
+
+            }
+
             $name = request()->input('name');
             $pwd = request()->input('pwd');
             $code = request()->input('code');

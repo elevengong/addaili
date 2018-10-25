@@ -144,12 +144,10 @@ function changelock_user( state,admin_id ){
                 if(data.status == 0)
                 {
                     layer.msg( data.msg );
-
                 }else{
                     window.location.reload();
                     layer.msg( data.msg );
                 }
-
             },
             error:function (data) {
                 layer.msg(data.msg);

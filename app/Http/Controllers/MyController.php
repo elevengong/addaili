@@ -10,7 +10,7 @@ use App\Http\Requests;
 class MyController extends Controller
 {
     public $backendPageNum = '20';
-
+    public $Ipbaimingdan = '0'; //ip白名单，目前只有菲律宾的ip可以login，1为开启，0为关闭
 
     public function __construct()
     {
@@ -57,6 +57,14 @@ class MyController extends Controller
     protected function getDepositMoneyById($id){
         $DepositDetail = Deposit::select('money')->find($id)->toArray();
         return $DepositDetail['money'];
+    }
+
+    //通过ip获取ip对应的信息
+    protected function getIpInfoByCurl($ip){
+        $json=@file_get_contents("http://ip.taobao.com/service/getIpInfo.php?ip=".$ip);
+        $ipInfo = json_decode($json,true);
+        return $ipInfo;
+
     }
 
 

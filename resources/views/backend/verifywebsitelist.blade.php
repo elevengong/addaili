@@ -70,10 +70,7 @@
 
     </section>
     <script>
-        function verifywebsite(web_id) {
 
-            
-        }
 
     </script>
 

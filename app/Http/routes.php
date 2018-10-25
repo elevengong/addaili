@@ -63,6 +63,9 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/ads/verifylist','backend\WebsitesController@verifylist');
     Route::any('/backend/ads/verifyweb/{web_id}','backend\WebsitesController@verifyweb')->where(['web_id' => '[0-9]+']);
 
+    //广告列表
+    Route::any('/backend/ads/adslist','backend\AdsController@adslist');
+    Route::any('/backend/ads/verifyads','backend\AdsController@verifyads');
 
     //图片上传
     Route::any('/backend/upload','backend\JobController@upload');
