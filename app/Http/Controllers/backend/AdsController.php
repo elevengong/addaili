@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Model\Ads;
+use App\Model\Traffic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MyController;
 use App\Http\Requests;
@@ -20,6 +21,10 @@ class AdsController extends MyController
 
         }else{
             $adsListArray = Ads::orderBy('ads_id', 'desc')->paginate($this->backendPageNum);
+            foreach ($adsListArray as $v=>$ad){
+                $count = Traffic::where('ads_id',$ad['ads_id'])->where('click_status',1)->count();
+                $adsListArray[$v]['click_times'] = $count;
+            }
             return view('backend.adslist', compact('adsListArray','adsTypeArray','adsCountTypeArray'))->with('admin', session('admin'));
         }
 

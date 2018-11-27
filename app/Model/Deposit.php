@@ -11,4 +11,6 @@ class Deposit extends Model
     //public $timestamps = '';
 
     protected $fillable = ['member_id','order_no','money','status','remark','paytype_id','payaccount','account_name','pay_ip','created_at','updated_at'];
+
+
 }

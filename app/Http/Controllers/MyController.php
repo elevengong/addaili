@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Model\Deposit;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 
 class MyController extends Controller
@@ -15,6 +14,8 @@ class MyController extends Controller
     public function __construct()
     {
         date_default_timezone_set('Asia/Shanghai');
+
+
     }
 
     //删除指定session数据
