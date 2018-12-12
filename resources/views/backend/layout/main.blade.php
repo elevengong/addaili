@@ -67,26 +67,61 @@
     <div class="menu_dropdown bk_2">
         <dl id="menu-article">
             <dt>
-                <i class="Hui-iconfont">&#xe616;</i>后台管理
+                <i class="Hui-iconfont">&#xe616;</i>全局数据
                 <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
             </dt>
 
             <dd style="display: none">
                 <ul>
-                    <li><a data-href="{{url('/backend/adminlist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="管理员列表">管理员列表</a></li>
-                    <li><a data-href="{{url('/backend/static')}}" href="javascript:void(0)" onclick="clicklink(this)" title="总属性设置">总属性设置</a></li>
+                    <li><a data-href="{{url('/backend/adminlist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="管理员列表">后台管理员列表</a></li>
+                    <li><a data-href="{{url('/backend/static')}}" href="javascript:void(0)" onclick="clicklink(this)" title="Common属性设置">Common属性设置</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="核心属性设置">核心属性设置</a></li>
                 </ul>
             </dd>
 
             <dt>
-                <i class="Hui-iconfont">&#xe616;</i> 会员管理
+                <i class="Hui-iconfont">&#xe616;</i> 媒介主管理
                 <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
             </dt>
 
             <dd style="display: none">
                 <ul>
-                    <li><a data-href="{{url('/backend/member/adsmember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告会员">广告会员</a></li>
-                    <li><a data-href="{{url('/backend/member/sitemember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员">网站会员</a></li>
+                    <li><a data-href="{{url('/backend/member/sitemember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员">媒介主会员列表</a></li>
+                    <li><a data-href="{{url('/backend/ads/verifylist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="域名列表">域名列表</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告位列表">广告位列表</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="实时在投媒体">实时在投媒体</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="媒体别名管理">媒体别名管理</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="媒介主业绩（月）">媒介主业绩（月）</a></li>
+
+                </ul>
+            </dd>
+
+            <dt>
+                <i class="Hui-iconfont">&#xe616;</i> 广告主管理
+                <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            </dt>
+
+            <dd style="display: none">
+                <ul>
+                    <li><a data-href="{{url('/backend/member/adsmember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告会员">广告主会员列表</a></li>
+                    <li><a data-href="{{url('/backend/ads/adslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告竞价列表">竞价广告列表</a></li>
+                </ul>
+            </dd>
+
+            <dt>
+                <i class="Hui-iconfont">&#xe616;</i> 运营数据管理
+                <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+            </dt>
+
+            <dd style="display: none">
+                <ul>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投媒体">在投媒体</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投广告位">在投广告位</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="24小时计费图（按媒介）">24小时计费图（按媒介）</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="流量分析">24小时域名流量变化表</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="流量分析">24小时广告位流量变化表</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站类型分布">网站类型分布</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="浏览器分析">浏览器分析</a></li>
                 </ul>
             </dd>
 
@@ -103,32 +138,6 @@
                     <li><a data-href="{{url('/backend/money/withdraw')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员提款记录">网站会员提款记录</a></li>
                 </ul>
             </dd>
-
-            <dt>
-                <i class="Hui-iconfont">&#xe616;</i> 广告竞价
-                <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-
-            <dd style="display: none">
-                <ul>
-                    <li><a data-href="{{url('/backend/ads/verifylist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="审核网站">审核网站</a></li>
-                    <li><a data-href="{{url('/backend/ads/adslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告竞价列表">广告竞价列表</a></li>
-                </ul>
-            </dd>
-
-            <dt>
-                <i class="Hui-iconfont">&#xe616;</i> 流量分析
-                <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
-            </dt>
-
-            <dd style="display: none">
-                <ul>
-                    <li><a data-href="{{url('/backend/ads/traffic')}}" href="javascript:void(0)" onclick="clicklink(this)" title="流量分析">流量分析</a></li>
-                </ul>
-            </dd>
-
-
-
 
         </dl>
     </div>
