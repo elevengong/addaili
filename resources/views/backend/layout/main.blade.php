@@ -80,18 +80,18 @@
             </dd>
 
             <dt>
-                <i class="Hui-iconfont">&#xe616;</i> 媒介主管理
+                <i class="Hui-iconfont">&#xe616;</i> 站长管理
                 <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
             </dt>
 
             <dd style="display: none">
                 <ul>
-                    <li><a data-href="{{url('/backend/member/sitemember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员">媒介主会员列表</a></li>
+                    <li><a data-href="{{url('/backend/member/sitemember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员">站长会员列表</a></li>
                     <li><a data-href="{{url('/backend/ads/verifylist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="域名列表">域名列表</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告位列表">广告位列表</a></li>
-                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="实时在投媒体">实时在投媒体</a></li>
-                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="媒体别名管理">媒体别名管理</a></li>
-                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="媒介主业绩（月）">媒介主业绩（月）</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="实时在投站长">实时在投站长</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="站长域名别名管理">站长域名别名管理</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="站长业绩（月）">站长业绩（月）</a></li>
 
                 </ul>
             </dd>
@@ -115,7 +115,7 @@
 
             <dd style="display: none">
                 <ul>
-                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投媒体">在投媒体</a></li>
+                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投站长">在投站长</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投广告位">在投广告位</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="24小时计费图（按媒介）">24小时计费图（按媒介）</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="流量分析">24小时域名流量变化表</a></li>
@@ -132,9 +132,9 @@
 
             <dd style="display: none">
                 <ul>
-                    <li><a data-href="{{url('/backend/money/applydeposit')}}" href="javascript:void(0)" onclick="clicklink(this)" title="充值审核">充值审核</a></li>
-                    <li><a data-href="{{url('/backend/money/applywithdraw')}}" href="javascript:void(0)" onclick="clicklink(this)" title="提款审核">提款审核</a></li>
+                    <li><a data-href="{{url('/backend/money/applydeposit')}}" href="javascript:void(0)" onclick="clicklink(this)" title="充值审核">充值审核(人工)</a></li>
                     <li><a data-href="{{url('/backend/money/deposit')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告会员充值记录">广告会员充值记录</a></li>
+                    <li><a data-href="{{url('/backend/money/applywithdraw')}}" href="javascript:void(0)" onclick="clicklink(this)" title="提款审核">提款审核(人工)</a></li>
                     <li><a data-href="{{url('/backend/money/withdraw')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员提款记录">网站会员提款记录</a></li>
                 </ul>
             </dd>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Model\MemberBalance;
 use App\Model\Withdraw;
 use App\Model\Member;
 use Illuminate\Http\Request;
@@ -16,38 +17,50 @@ class WithdrawController extends MyController
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
-            $WithdrawArray = Withdraw::select('withdraw.*','member.name','paytype.paytype')->where('withdraw.status',0)
+            $WithdrawArray = Withdraw::select('withdraw_order.*','member.name','withdraw_info.account_name','withdraw_info.bank_number','bank.bank_name')
                 ->leftJoin('member',function ($join){
-                    $join->on('member.member_id','=','withdraw.member_id');
+                    $join->on('member.member_id','=','withdraw_order.member_id');
                 })
-                ->leftJoin('paytype',function ($join){
-                    $join->on('paytype.paytype_id','=','withdraw.paytype_id');
+                ->leftJoin('withdraw_info',function ($join){
+                    $join->on('withdraw_info.withdraw_info_id','=','withdraw_order.withdraw_info_id');
+                })
+                ->leftJoin('bank',function ($join){
+                    $join->on('bank.bank_id','=','withdraw_info.bank_id');
                 })
                 ->where('member.name','like',$member . '%')
-                ->orderBy('withdraw.created_at', 'desc')->paginate($this->backendPageNum);
-
+                ->where('withdraw_order.status',0)
+                ->orderBy('withdraw_order.created_at', 'desc')->paginate($this->backendPageNum);
         }else{
-            $WithdrawArray = Withdraw::select('withdraw.*','member.name','paytype.paytype')->where('withdraw.status',0)
+            $WithdrawArray = Withdraw::select('withdraw_order.*','member.name','withdraw_info.account_name','withdraw_info.bank_number','bank.bank_name')
                 ->leftJoin('member',function ($join){
-                    $join->on('member.member_id','=','withdraw.member_id');
+                    $join->on('member.member_id','=','withdraw_order.member_id');
                 })
-                ->leftJoin('paytype',function ($join){
-                    $join->on('paytype.paytype_id','=','withdraw.paytype_id');
+                ->leftJoin('withdraw_info',function ($join){
+                    $join->on('withdraw_info.withdraw_info_id','=','withdraw_order.withdraw_info_id');
                 })
-                ->orderBy('withdraw.created_at', 'desc')->paginate($this->backendPageNum);
+                ->leftJoin('bank',function ($join){
+                    $join->on('bank.bank_id','=','withdraw_info.bank_id');
+                })
+                ->where('withdraw_order.status',0)
+                ->orderBy('withdraw_order.created_at', 'desc')->paginate($this->backendPageNum);
         }
         return view('backend.withdrawlist', compact('WithdrawArray'))->with('admin', session('admin'));
     }
 
     //处理站长提款订单
     public function dealwithdraworder(Request $request,$withdraw_id){
-        $WithdrawDetail = Withdraw::select('withdraw.*','member.name','paytype.paytype')->where('withdraw.withdraw_id',$withdraw_id)
+        $WithdrawDetail = Withdraw::select('withdraw_order.*','member.name','withdraw_info.account_name','withdraw_info.bank_number','bank.bank_name')
             ->leftJoin('member',function ($join){
-                $join->on('member.member_id','=','withdraw.member_id');
+                $join->on('member.member_id','=','withdraw_order.member_id');
             })
-            ->leftJoin('paytype',function ($join){
-                $join->on('paytype.paytype_id','=','withdraw.paytype_id');
-            })->get()->toArray();
+            ->leftJoin('withdraw_info',function ($join){
+                $join->on('withdraw_info.withdraw_info_id','=','withdraw_order.withdraw_info_id');
+            })
+            ->leftJoin('bank',function ($join){
+                $join->on('bank.bank_id','=','withdraw_info.bank_id');
+            })
+            ->where('withdraw_order.withdraw_id',$withdraw_id)
+            ->get()->toArray();
         return view('backend.dealwithdraworder', compact('WithdrawDetail'));
     }
 
@@ -65,6 +78,7 @@ class WithdrawController extends MyController
                     //行锁
                     $OrderDetail = Withdraw::where('withdraw_id',$withdraw_id)->where('status',0)->lockForUpdate()->get()->toArray();
                     $MemberDetail = Member::where('member_id',$OrderDetail[0]['member_id'])->lockForUpdate()->get()->toArray();
+                    $MemberBalance = MemberBalance::where('id',$OrderDetail[0]['member_id'])->lockForUpdate()->get()->toArray();
                     if($MemberDetail[0]['frozen'] < $OrderDetail[0]['money'])
                     {
                         DB::rollBack();
@@ -104,6 +118,7 @@ class WithdrawController extends MyController
                     //行锁
                     $OrderDetail = Withdraw::where('withdraw_id',$withdraw_id)->where('status',0)->lockForUpdate()->get()->toArray();
                     $MemberDetail = Member::where('member_id',$OrderDetail[0]['member_id'])->lockForUpdate()->get()->toArray();
+                    $MemberBalance = MemberBalance::where('id',$OrderDetail[0]['member_id'])->lockForUpdate()->get()->toArray();
                     if($MemberDetail[0]['frozen'] < $OrderDetail[0]['money'])
                     {
                         DB::rollBack();
@@ -113,7 +128,7 @@ class WithdrawController extends MyController
                         exit;
                     }
                     $result = Withdraw::where('withdraw_id', $withdraw_id)->update(['status' => $status, 'remark' => $remark]);
-                    $result1 = Member::where('member_id',$OrderDetail[0]['member_id'])->increment('balance',$OrderDetail[0]['money']);
+                    $result1 = MemberBalance::where('id',$OrderDetail[0]['member_id'])->increment('balance',$OrderDetail[0]['money']);
                     $result2 = Member::where('member_id',$OrderDetail[0]['member_id'])->decrement('frozen',$OrderDetail[0]['money']);
                     if($result and $result1 and $result2)
                     {
@@ -139,33 +154,44 @@ class WithdrawController extends MyController
     }
 
     //站长提款记录列表
-    public function withdrawrecord(Request $request){
-        if($request->isMethod('post'))
-        {
+    public function withdrawrecord(Request $request)
+    {
+        if ($request->isMethod('post')) {
             $member = request()->input('member');
-            $WithdrawArray = Withdraw::select('withdraw.*','member.name','paytype.paytype')->where('withdraw.status','!=','0')
-                ->leftJoin('member',function ($join){
-                    $join->on('member.member_id','=','withdraw.member_id');
-                })
-                ->leftJoin('paytype',function ($join){
-                    $join->on('paytype.paytype_id','=','withdraw.paytype_id');
-                })
-                ->where('member.name','like',$member . '%')
-                ->orderBy('withdraw.updated_at', 'desc')->paginate($this->backendPageNum);
 
-        }else{
-            $WithdrawArray = Withdraw::select('withdraw.*','member.name','paytype.paytype')->where('withdraw.status','!=','0')
-                ->leftJoin('member',function ($join){
-                    $join->on('member.member_id','=','withdraw.member_id');
+            $WithdrawArray = Withdraw::select('withdraw_order.*', 'member.name', 'withdraw_info.account_name', 'withdraw_info.bank_number', 'bank.bank_name')
+                ->leftJoin('member', function ($join) {
+                    $join->on('member.member_id', '=', 'withdraw_order.member_id');
                 })
-                ->leftJoin('paytype',function ($join){
-                    $join->on('paytype.paytype_id','=','withdraw.paytype_id');
+                ->leftJoin('withdraw_info', function ($join) {
+                    $join->on('withdraw_info.withdraw_info_id', '=', 'withdraw_order.withdraw_info_id');
                 })
-                ->orderBy('withdraw.updated_at', 'desc')->paginate($this->backendPageNum);
+                ->leftJoin('bank', function ($join) {
+                    $join->on('bank.bank_id', '=', 'withdraw_info.bank_id');
+                })
+                ->where('withdraw_order.status', '!=', 0)
+                ->where('member.name', 'like', $member . '%')
+                ->orderBy('withdraw_order.created_at', 'desc')->paginate($this->backendPageNum);
+
+        } else {
+
+            $WithdrawArray = Withdraw::select('withdraw_order.*', 'member.name', 'withdraw_info.account_name', 'withdraw_info.bank_number', 'bank.bank_name')
+                ->leftJoin('member', function ($join) {
+                    $join->on('member.member_id', '=', 'withdraw_order.member_id');
+                })
+                ->leftJoin('withdraw_info', function ($join) {
+                    $join->on('withdraw_info.withdraw_info_id', '=', 'withdraw_order.withdraw_info_id');
+                })
+                ->leftJoin('bank', function ($join) {
+                    $join->on('bank.bank_id', '=', 'withdraw_info.bank_id');
+                })
+                ->where('withdraw_order.status', '!=', 0)
+                ->orderBy('withdraw_order.created_at', 'desc')->paginate($this->backendPageNum);
+
         }
         return view('backend.withdrawrecord', compact('WithdrawArray'))->with('admin', session('admin'));
-    }
 
+    }
 
 
 

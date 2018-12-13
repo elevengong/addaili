@@ -23,8 +23,6 @@
                             <th width="100">属性介绍</th>
                             <th width="80">Value</th>
                             <th width="70">状态</th>
-                            <th width="70">创建时间</th>
-                            <th width="70">更新时间</th>
                             <th width="100">操作</th>
                         </tr>
                         </thead>
@@ -32,17 +30,15 @@
 
                         @foreach($StaticSetArray as $data)
                             <tr class="text-c">
-                                <td>{{$data['set_id']}}</td>
+                                <td>{{$data['common_set_id']}}</td>
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['nickname']}}</td>
                                 <td>{{$data['value']}}</td>
                                 <td>
-                                    <input type="button" onclick="changestatus_static('{{$data['status']}}','{{$data['set_id']}}')" class="btn btn-@if($data['status'] ==0)warning @elseif($data['status'] ==1)primary @endif radius" value="@if($data['status'] ==1)启用 @else 禁用 @endif"  />
+                                    <input type="button" onclick="changestatus_static('{{$data['status']}}','{{$data['common_set_id']}}')" class="btn btn-@if($data['status'] ==0)warning @elseif($data['status'] ==1)primary @endif radius" value="@if($data['status'] ==1)启用 @else 禁用 @endif"  />
                                 </td>
-                                <td>{{$data['created_at']}}</td>
-                                <td>{{$data['updated_at']}}</td>
                                 <td class="td-manage">
-                                    <a title="编辑" href="javascript:edit_static({{$data['set_id']}})" class="ml-5"
+                                    <a title="编辑" href="javascript:edit_static({{$data['common_set_id']}})" class="ml-5"
                                        style="text-decoration:none">
                                         <i class="Hui-iconfont">&#xe6df;</i>
                                     </a>

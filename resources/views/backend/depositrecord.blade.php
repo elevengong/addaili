@@ -42,7 +42,7 @@
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['money']}}</td>
                                 <td>{{$data['order_no']}}</td>
-                                <td>{{$data['paytype']}}</td>
+                                <td>{{$data['value']}}</td>
                                 <td>{{$data['payaccount']}}</td>
                                 <td>{{$data['account_name']}}</td>
                                 <td>{{$data['pay_ip']}}</td>

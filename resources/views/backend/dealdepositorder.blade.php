@@ -12,9 +12,9 @@
     <link href="<?php echo asset( "/resources/views/backend/static/h-ui.admin/css/style.css") ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo asset( "/resources/views/backend/static/Hui-iconfont/1.0.8/iconfont.css") ?>" rel="stylesheet" type="text/css" />
 
-    <title>修改静态属性</title>
-    <meta name="keywords" content="修改静态属性">
-    <meta name="description" content="修改静态属性">
+    <title>处理广告商存款</title>
+    <meta name="keywords" content="处理广告商存款">
+    <meta name="description" content="处理广告商存款">
 </head>
 <body>
 <script type="text/javascript" src="<?php echo asset( "/resources/views/backend/js/jquery.min.1.9.1.js") ?>"></script>
@@ -46,7 +46,7 @@
         <div class="col-xs-12 row cl">
             <label class="form-label col-xs-3 col-sm-3">支付类型：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$DepositDetail[0]['paytype']}}
+                {{$DepositDetail[0]['value']}}
             </div>
         </div>
         <div class="col-xs-12 row cl">

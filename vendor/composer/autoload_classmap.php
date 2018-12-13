@@ -169,7 +169,7 @@ return array(
     'PHPUnit_Framework_MockObject_Invocation' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation.php',
     'PHPUnit_Framework_MockObject_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/InvocationMocker.php',
     'PHPUnit_Framework_MockObject_Invocation_Object' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation/Object.php',
-    'PHPUnit_Framework_MockObject_Invocation_Static' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation/StaticSet.php',
+    'PHPUnit_Framework_MockObject_Invocation_Static' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation/CommonSetting.php.php',
     'PHPUnit_Framework_MockObject_Invokable' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invokable.php',
     'PHPUnit_Framework_MockObject_Matcher' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher.php',
     'PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/AnyInvokedCount.php',

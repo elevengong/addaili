@@ -12,9 +12,9 @@
     <link href="<?php echo asset( "/resources/views/backend/static/h-ui.admin/css/style.css") ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo asset( "/resources/views/backend/static/Hui-iconfont/1.0.8/iconfont.css") ?>" rel="stylesheet" type="text/css" />
 
-    <title>修改静态属性</title>
-    <meta name="keywords" content="修改静态属性">
-    <meta name="description" content="修改静态属性">
+    <title>处理站长提款申请</title>
+    <meta name="keywords" content="处理站长提款申请">
+    <meta name="description" content="处理站长提款申请">
 </head>
 <body>
 <script type="text/javascript" src="<?php echo asset( "/resources/views/backend/js/jquery.min.1.9.1.js") ?>"></script>
@@ -44,21 +44,9 @@
             </div>
         </div>
         <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">支付类型：</label>
+            <label class="form-label col-xs-3 col-sm-3">提款帐号信息：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$WithdrawDetail[0]['paytype']}}
-            </div>
-        </div>
-        <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">提款帐号：</label>
-            <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$WithdrawDetail[0]['withdraw_account']}}
-            </div>
-        </div>
-        <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">帐号名：</label>
-            <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$WithdrawDetail[0]['account_name']}}
+                {{$WithdrawDetail[0]['bank_name']}}-{{$WithdrawDetail[0]['account_name']}}-{{$WithdrawDetail[0]['bank_number']}}
             </div>
         </div>
         <div class="col-xs-12 row cl">

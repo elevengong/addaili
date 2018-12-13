@@ -24,9 +24,7 @@
                             <th width="50">站长</th>
                             <th width="50">提款金额</th>
                             <th width="50">订单号</th>
-                            <th width="50">支付类型</th>
-                            <th width="50">提款帐号</th>
-                            <th width="50">帐号名</th>
+                            <th width="100">提款帐号信息</th>
                             <th width="50">支付IP</th>
                             <th width="50">状态</th>
                             <th width="100">备注</th>
@@ -42,15 +40,13 @@
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['money']}}</td>
                                 <td>{{$data['order_no']}}</td>
-                                <td>{{$data['paytype']}}</td>
-                                <td>{{$data['withdraw_account']}}</td>
-                                <td>{{$data['account_name']}}</td>
+                                <td>{{$data['bank_name']}}-{{$data['account_name']}}-{{$data['bank_number']}}</td>
                                 <td>{{$data['apply_withdraw_ip']}}</td>
                                 <td>等待处理</td>
                                 <td>{{$data['remark']}}</td>
                                 <td>{{$data['created_at']}}</td>
                                 <td class="td-manage">
-                                    <input type="button" onclick="dealwithdraw('{{$data['withdraw_id']}}')" class="btn btn-primary radius" value="审核提款" />
+                                    <input type="button" onclick="dealwithdraw('{{$data['withdraw_id']}}')" class="btn btn-primary radius" value="人工审核" />
                                 </td>
                             </tr>
                         @endforeach

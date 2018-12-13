@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Withdraw extends Model
 {
-    protected $table = 'withdraw';
+    protected $table = 'withdraw_order';
     protected $primaryKey = 'withdraw_id';
     //public $timestamps = '';
 
-    protected $fillable = ['member_id','order_no','money','status','remark','paytype_id','withdraw_account','account_name','apply_withdraw_ip','created_at','updated_at'];
+    protected $fillable = ['withdraw_id','member_id','withdraw_info_id','order_no','money','status','remark','apply_withdraw_ip','created_at','updated_at'];
 }

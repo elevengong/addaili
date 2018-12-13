@@ -14,7 +14,7 @@ function changestatus_static(status,id) {
             url:"/backend/static/changestatus",
             dataType:'json',
             headers:{'X-CSRF-TOKEN':$('input[name="_token"]').val()},
-            data:{'set_id':id, 'status':status},
+            data:{'common_set_id':id, 'status':status},
             success:function(data){
                 if(data.status == 0)
                 {
