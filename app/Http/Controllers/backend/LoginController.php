@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Model\Admin;
+use App\Model\CommonSetting;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -78,7 +79,13 @@ class LoginController extends MyController
             echo json_encode($data);
 
         }else{
-            return view('backend.login');
+            $commonSetting = array();
+            $commonSettingArray = CommonSetting::where('status',1)->orderBy('common_set_id','asc')->get()->toArray();
+            foreach($commonSettingArray as $set)
+            {
+                $commonSetting[$set['name']] = $set['value'];
+            }
+            return view('backend.login',compact('commonSetting'));
         }
 
     }

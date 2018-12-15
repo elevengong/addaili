@@ -12,9 +12,9 @@
     <link href="<?php echo asset( "/resources/views/backend/static/h-ui.admin/css/style.css") ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo asset( "/resources/views/backend/static/Hui-iconfont/1.0.8/iconfont.css") ?>" rel="stylesheet" type="text/css" />
 
-    <title>鼎丰国际招聘管理系统后台登陆</title>
-    <meta name="keywords" content="鼎丰国际招聘管理系统后台登陆">
-    <meta name="description" content="鼎丰国际招聘管理系统后台登陆">
+    <title>{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}管理系统后台登陆</title>
+    <meta name="keywords" content="{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}管理系统后台登陆">
+    <meta name="description" content="{{isset($commonSetting['website_name'])?$commonSetting['website_name']:''}}管理系统后台登陆">
 </head>
 <body>
 <div class="header1"></div>
