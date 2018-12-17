@@ -23,6 +23,7 @@
                             <th width="50">ID</th>
                             <th width="50">广告主</th>
                             <th width="50">QQ</th>
+                            <th width="50">手机</th>
                             <th width="50">余额</th>
                             <th width="50">冻结</th>
                             <th width="50">状态</th>
@@ -39,6 +40,7 @@
                                 <td>{{$data['member_id']}}</td>
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['qq']}}</td>
+                                <td>{{$data['mobile']}}</td>
                                 <td>{{$data['balance']}}</td>
                                 <td>{{$data['frozen']}}</td>
                                 <td>
@@ -48,10 +50,10 @@
                                 <td>{{$data['login_ip']}}</td>
                                 <td>{{$data['created_at']}}</td>
                                 <td class="td-manage">
-                                    <input type="button" onclick="doposit()" class="btn btn-primary radius" value="人工充值"  />
+                                    <input type="button" onclick="doposit()" class="btn btn-primary radius" value="人工充值"/>
                                     <input type="button" onclick="resetmemberpwd('{{$data['member_id']}}','{{$data['name']}}','广告商')" class="btn btn-primary radius" value="重设密码"  />
-                                    <input type="button" onclick="memberdeposit()" class="btn btn-primary radius" value="充值记录"  />
-                                    <input type="button" onclick="memberspendrecod()" class="btn btn-primary radius" value="消费记录"  />
+                                    <input type="button" onclick="memberdeposit()" class="btn btn-primary radius" value="充值记录"  style="margin-top: 5px;" />
+                                    <input type="button" onclick="memberspendrecod()" class="btn btn-primary radius" value="消费记录"  style="margin-top: 5px;" />
                                 </td>
                             </tr>
                         @endforeach

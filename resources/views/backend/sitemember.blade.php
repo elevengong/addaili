@@ -23,9 +23,9 @@
                             <th width="50">ID</th>
                             <th width="50">站长</th>
                             <th width="50">QQ</th>
+                            <th width="50">手机</th>
                             <th width="50">余额</th>
                             <th width="50">冻结</th>
-                            <th width="50">个人扣量</th>
                             <th width="50">状态</th>
                             <th width="50">最后登录时间</th>
                             <th width="50">最后登录IP</th>
@@ -40,9 +40,9 @@
                                 <td>{{$data['member_id']}}</td>
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['qq']}}</td>
+                                <td>{{$data['mobile']}}</td>
                                 <td>{{$data['balance']}}</td>
                                 <td>{{$data['frozen']}}</td>
-                                <td>{{$data['personal_rate']}}</td>
                                 <td>
                                     <input type="button" onclick="changememberstatus('{{$data['status']}}','{{$data['member_id']}}')" class="btn btn-@if($data['status'] ==0)warning @elseif($data['status'] ==1)primary @endif radius" value="@if($data['status'] ==1)正常 @else 冻结 @endif"  />
                                 </td>
@@ -52,8 +52,8 @@
                                 <td class="td-manage">
                                     <input type="button" onclick="resetmemberpwd('{{$data['member_id']}}','{{$data['name']}}','站长')" class="btn btn-primary radius" value="重设密码" />
                                     <input type="button" onclick="setpersonalrate('{{$data['member_id']}}','{{$data['personal_rate']}}','{{$data['name']}}')" class="btn btn-primary radius" value="设置扣量"  />
-                                    <input type="button" onclick="memberwithdraw()" class="btn btn-primary radius" value="提款记录"  />
-                                    <input type="button" onclick="membersites()" class="btn btn-primary radius" value="会员网站"  />
+                                    <input type="button" onclick="memberwithdraw()" class="btn btn-primary radius" value="提款记录" style="margin-top: 5px;" />
+                                    <input type="button" onclick="membersites()" class="btn btn-primary radius" value="会员网站" style="margin-top: 5px;" />
                                 </td>
                             </tr>
                         @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Model\Ads;
+use App\Model\Setting;
 use App\Model\Traffic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MyController;
@@ -12,20 +13,19 @@ class AdsController extends MyController
 {
     //广告列表
     public function adslist(Request $request){
-        //这里要写进redis
-        $adsTypeArray = array('1'=> '横幅','2'=>'竖幅','3'=>'手机弹出广告');
-        $adsCountTypeArray = array('1'=> 'CPC','2'=>'CPM');
 
         if($request->isMethod('post'))
         {
 
         }else{
-            $adsListArray = Ads::orderBy('ads_id', 'desc')->paginate($this->backendPageNum);
-            foreach ($adsListArray as $v=>$ad){
-                $count = Traffic::where('ads_id',$ad['ads_id'])->where('click_status',1)->count();
-                $adsListArray[$v]['click_times'] = $count;
+            $settingArray = Setting::orWhere('settinggroup','adsType')->orWhere('settinggroup','countType')->where('status',1)->get()->toArray();
+            $setting = array();
+            foreach($settingArray as $set)
+            {
+                $setting[$set['set_id']] = $set['remark'];
             }
-            return view('backend.adslist', compact('adsListArray','adsTypeArray','adsCountTypeArray'))->with('admin', session('admin'));
+            $adsArray = Ads::orderBy('created_at','desc')->paginate($this->backendPageNum);
+            return view('backend.adslist', compact('setting','adsArray'))->with('admin', session('admin'));
         }
 
     }

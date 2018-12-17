@@ -14,9 +14,17 @@ class MemberController extends MyController
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
-            $MemberArray = Member::where('type',1)->where('name', 'like', $member . '%')->orderBy('member_id', 'asc')->paginate($this->backendPageNum);
+            $MemberArray = Member::select('member.*','member_balance.balance')
+                ->leftJoin('member_balance',function ($join){
+                    $join->on('member_balance.id','=','member.member_id');
+                })
+                ->where('member.type',1)->where('member.name', 'like', '%'.$member.'%')->orderBy('member.member_id', 'asc')->paginate($this->backendPageNum);
         }else{
-            $MemberArray = Member::where('type',1)->orderBy('member_id', 'asc')->paginate($this->backendPageNum);
+            $MemberArray = Member::select('member.*','member_balance.balance')
+                ->leftJoin('member_balance',function ($join){
+                    $join->on('member_balance.id','=','member.member_id');
+                })
+                ->where('member.type',1)->orderBy('member.member_id', 'asc')->paginate($this->backendPageNum);
         }
         return view('backend.adsmember', compact('MemberArray'))->with('admin', session('admin'));
     }
@@ -25,9 +33,17 @@ class MemberController extends MyController
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
-            $MemberArray = Member::where('type',2)->where('name', 'like', $member . '%')->orderBy('member_id', 'asc')->paginate($this->backendPageNum);
+            $MemberArray = Member::select('member.*','member_balance.balance')
+                ->leftJoin('member_balance',function ($join){
+                    $join->on('member_balance.id','=','member.member_id');
+                })
+                ->where('member.type',2)->where('member.name', 'like', '%'.$member.'%')->orderBy('member.member_id', 'asc')->paginate($this->backendPageNum);
         }else{
-            $MemberArray = Member::where('type',2)->orderBy('member_id', 'asc')->paginate($this->backendPageNum);
+            $MemberArray = Member::select('member.*','member_balance.balance')
+                ->leftJoin('member_balance',function ($join){
+                    $join->on('member_balance.id','=','member.member_id');
+                })
+                ->where('member.type',2)->orderBy('member.member_id', 'asc')->paginate($this->backendPageNum);
         }
         return view('backend.sitemember', compact('MemberArray'))->with('admin', session('admin'));
     }
