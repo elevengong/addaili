@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend;
 
 use App\Model\Ads;
+use App\Model\CommonSetting;
+use App\Model\Material;
 use App\Model\Setting;
 use App\Model\Traffic;
 use Illuminate\Http\Request;
@@ -38,6 +40,37 @@ class AdsController extends MyController
             $status = request()->input('status');
             $result = Ads::where('ads_id', $ads_id)->update(['status' => $status]);
             if ($result) {
+                $data['status'] = 1;
+                $data['msg'] = "修改成功";
+            } else {
+                $data['status'] = 0;
+                $data['msg'] = "修改失败";
+            }
+            echo json_encode($data);
+        }
+    }
+
+    public function materiallist(Request $request){
+        $website_domain = CommonSetting::where('name','website_domain')->get()->toArray();
+
+        if($request->isMethod('post')){
+
+        }else{
+            $materialArray  = Material::select('member.member_id','member.name','material.*')
+                ->leftJoin('member',function ($join){
+                    $join->on('member.member_id','=','material.ads_id');
+                })
+            ->orderBy('material.created_at','desc')->paginate($this->backendPageNum);
+            return view('backend.materiallist', compact('materialArray','website_domain'))->with('admin', session('admin'));
+        }
+    }
+
+    public function updatematerialstatus(Request $request){
+        if($request->isMethod('post')){
+            $id = request()->input('id');
+            $status = request()->input('status');
+            $res = Material::where('id',$id)->update(['status'=> $status]);
+            if ($res) {
                 $data['status'] = 1;
                 $data['msg'] = "修改成功";
             } else {

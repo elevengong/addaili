@@ -105,6 +105,7 @@
                 <ul>
                     <li><a data-href="{{url('/backend/member/adsmember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告会员">广告主会员列表</a></li>
                     <li><a data-href="{{url('/backend/ads/adslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告竞价列表">竞价广告列表</a></li>
+                    <li><a data-href="{{url('/backend/ads/materiallist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告素材管理">广告素材管理</a></li>
                 </ul>
             </dd>
 

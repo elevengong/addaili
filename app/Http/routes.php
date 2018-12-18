@@ -48,7 +48,9 @@ Route::group(['middleware' => ['web','admin.login']],function () {
 
     Route::any('/backend/money/deposit','backend\DepositController@depositrecord');
 
-
+    //广告素材管理
+    Route::any('/backend/ads/materiallist','backend\AdsController@materiallist');
+    Route::post('/backend/material/updatestatus','backend\AdsController@updatematerialstatus');
 
     //站长提款
     Route::any('/backend/money/applywithdraw','backend\WithdrawController@applywithdraw');
