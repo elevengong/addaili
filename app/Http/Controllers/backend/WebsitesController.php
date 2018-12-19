@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Model\Setting;
 use App\Model\Websites;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MyController;
@@ -11,6 +12,12 @@ class WebsitesController extends MyController
 {
     //站长网站审核列表
     public function verifylist(Request $request){
+        $settingArray = Setting::where('settinggroup','WebType')->get()->toArray();
+        $setting = array();
+        foreach ($settingArray as $set)
+        {
+            $setting[$set['set_id']] = $set['remark'];
+        }
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
@@ -30,11 +37,17 @@ class WebsitesController extends MyController
         }
         //print_r($WebsitesArray);exit;
 
-        return view('backend.verifywebsitelist', compact('WebsitesArray'))->with('admin', session('admin'));
+        return view('backend.verifywebsitelist', compact('WebsitesArray','setting'))->with('admin', session('admin'));
     }
 
     //审核站长网站
     public function verifyweb(Request $request,$web_id){
+        $settingArray = Setting::where('settinggroup','WebType')->get()->toArray();
+        $setting = array();
+        foreach ($settingArray as $set)
+        {
+            $setting[$set['set_id']] = $set['remark'];
+        }
         if($request->isMethod('post'))
         {
             $status = request()->input('status');
@@ -53,7 +66,7 @@ class WebsitesController extends MyController
                     $join->on('member.member_id','=','websites.member_id');
                 })
                 ->where('websites.web_id',$web_id)->get()->toArray();
-            return view('backend.viewverifywebsite', compact('WebsiteDetail'));
+            return view('backend.viewverifywebsite', compact('WebsiteDetail','setting'));
         }
 
   }

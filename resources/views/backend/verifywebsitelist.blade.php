@@ -24,11 +24,10 @@
                             <th width="50">站长</th>
                             <th width="50">网站名称</th>
                             <th width="100">网址</th>
+                            <th width="50">备案号</th>
                             <th width="50">状态</th>
                             <th width="50">网站类型</th>
-                            <th width="50">允许广告类型</th>
-                            <th width="50">广告计费类型</th>
-                            <th width="30">创建时间</th>
+                            <th width="30">审核时间</th>
                             <th width="100">操作</th>
                         </tr>
                         </thead>
@@ -39,17 +38,16 @@
                                 <td>{{$data['web_id']}}</td>
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['web_name']}}</td>
-                                <td><a href="{{$data['web_url']}}" target="_blank" style="color: red;">{{$data['web_url']}}</a></td>
-                                <td>@if($data['status']==0)等待审核@elseif($data['status']==1)通过@else已冻结@endif</td>
-                                <td>@if($data['webtype']==0)视频网站@else普通网站@endif</td>
-                                <td>{{$data['allow_ads_type']}}</td>
-                                <td>{{$data['allow_ads_count']}}</td>
+                                <td><a href="{{$data['domain']}}" target="_blank" style="color: red;">{{$data['domain']}}</a></td>
+                                <td>{{$data['icp']}}</td>
+                                <td>@if($data['status']==0)等待审核@elseif($data['status']==1)通过@else没有通过审核@endif</td>
+                                <td>{{$setting[$data['webtype']]}}</td>
                                 <td>{{$data['created_at']}}</td>
                                 <td class="td-manage">
                                     @if($data['status']==0)
                                     <input type="button" onclick="verifywebsite('{{$data['web_id']}}')" class="btn btn-primary radius" value="审核网站" />
-                                        @else
-                                    &nbsp;
+                                        @elseif($data['status']==1)
+                                        <input type="button" onclick="verifywebsite('{{$data['web_id']}}')" class="btn btn-primary radius" value="关闭网站" />
                                         @endif
                                 </td>
                             </tr>

@@ -40,25 +40,13 @@
         <div class="col-xs-12 row cl">
             <label class="form-label col-xs-3 col-sm-3">网址：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                <a href="{{$WebsiteDetail[0]['web_url']}}" target="_blank">{{$WebsiteDetail[0]['web_url']}}</a>
+                <a href="{{$WebsiteDetail[0]['domain']}}" target="_blank">{{$WebsiteDetail[0]['domain']}}</a>
             </div>
         </div>
         <div class="col-xs-12 row cl">
             <label class="form-label col-xs-3 col-sm-3">网站类型：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$WebsiteDetail[0]['webtype']}}
-            </div>
-        </div>
-        <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">允许广告类型：</label>
-            <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$WebsiteDetail[0]['allow_ads_type']}}
-            </div>
-        </div>
-        <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">允许广告计费类型：</label>
-            <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$WebsiteDetail[0]['allow_ads_count']}}
+                {{$setting[$WebsiteDetail[0]['webtype']]}}
             </div>
         </div>
         <div class="col-xs-12 row cl">
