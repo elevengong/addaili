@@ -52,7 +52,9 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/ads/materiallist','backend\AdsController@materiallist');
     Route::post('/backend/material/updatestatus','backend\AdsController@updatematerialstatus');
 
-    //站长提款
+    //站长
+     Route::any('/backend/sitemember/adslist','backend\SitememberController@adslist');
+
     Route::any('/backend/money/applywithdraw','backend\WithdrawController@applywithdraw');
     Route::get('/backend/money/dealwithdraworder/{withdraw_id}','backend\WithdrawController@dealwithdraworder')->where(['withdraw_id' => '[0-9]+']);
     Route::any('/backend/money/updatewithdraworder/{withdraw_id}','backend\WithdrawController@updatewithdraworder')->where(['withdraw_id' => '[0-9]+']);

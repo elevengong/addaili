@@ -88,7 +88,7 @@
                 <ul>
                     <li><a data-href="{{url('/backend/member/sitemember')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员">站长会员列表</a></li>
                     <li><a data-href="{{url('/backend/ads/verifylist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="域名列表">域名列表</a></li>
-                    <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告位列表">广告位列表</a></li>
+                    <li><a data-href="{{url('/backend/sitemember/adslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告位列表">广告位列表</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="实时在投站长">实时在投站长</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="站长域名别名管理">站长域名别名管理</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="站长业绩（月）">站长业绩（月）</a></li>
