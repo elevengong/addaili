@@ -123,6 +123,8 @@
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="流量分析">24小时广告位流量变化表</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站类型分布">网站类型分布</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="浏览器分析">浏览器分析</a></li>
+                    <li><a data-href="{{url('/backend/management/traffic')}}" href="javascript:void(0)" onclick="clicklink(this)" title="浏览明细">浏览明细</a></li>
+
                 </ul>
             </dd>
 

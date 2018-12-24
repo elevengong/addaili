@@ -71,8 +71,8 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/ads/adslist','backend\AdsController@adslist');
     Route::any('/backend/ads/verifyads','backend\AdsController@verifyads');
 
-    //流量统计
-    Route::any('/backend/ads/traffic','backend\TrafficController@traffic');
+    //运营数据管理
+    Route::any('/backend/management/traffic','backend\TrafficController@traffic');
 
     //图片上传
     Route::any('/backend/upload','backend\JobController@upload');

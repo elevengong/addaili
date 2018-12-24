@@ -21,20 +21,20 @@
                         <thead>
                         <tr class="text-c">
                             <th width="50">IP</th>
-                            <th width="50">站长ID</th>
-                            <th width="50">网站ID</th>
-                            <th width="50">显示网站</th>
                             <th width="50">来路</th>
-                            <th width="50">广告主ID</th>
-                            <th width="50">广告ID</th>
-                            <th width="50">点击？</th>
-                            <th width="50">省</th>
-                            <th width="50">市</th>
-                            <th width="50">广告显示时间</th>
-                            <th width="50">手机？</th>
-                            <th width="50">系统版本</th>
-                            <th width="50">浏览器版本</th>
-                            <th width="50">是否扣费</th>
+                            <th width="50">广告主广告ID</th>
+                            <th width="50">站长广告位ID</th>
+                            <th width="50">是否点击</th>
+                            <th width="50">省(地区)</th>
+                            <th width="50">访问时间</th>
+                            <th width="50">是否手机</th>
+                            <th width="50">访客系统</th>
+                            <th width="50">来源种类</th>
+                            <th width="50">来源媒介</th>
+                            <th width="50">设备型号</th>
+                            <th width="50">设备品牌</th>
+                            <th width="50">运营商</th>
+                            <th width="50">广告商扣费</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,20 +42,21 @@
                         @foreach($traffics as $data)
                             <tr class="text-c">
                                 <td>{{$data['ip']}}</td>
-                                <td>{{$data['webmaster_id']}}</td>
-                                <td>{{$data['web_id']}}</td>
-                                <td>{{$data['web_domain']}}</td>
                                 <td>{{$data['come_url']}}</td>
-                                <td>{{$data['adsmember_id']}}</td>
                                 <td>{{$data['ads_id']}}</td>
+                                <td>{{$data['adspaceId']}}</td>
                                 <td>{{$data['click_status']}}</td>
-                                <td>{{$data['region_id']}}</td>
-                                <td>{{$data['city_id']}}</td>
-                                <td>{{$data['visit_time']}}</td>
+                                <td>{{$data['region']}}</td>
+                                <td>{{date('Y-m-d H:i:s',$data['visit_time'])}}</td>
                                 <td>{{$data['ismobile']}}</td>
-                                <td>{{$data['vistor_system']}}</td>
-                                <td>{{$data['vistor_exploer']}}</td>
+                                <td>{{$data['os']}}</td>
+                                <td>{{$data['client_type']}}</td>
+                                <td>{{isset($setting[$data['client_name']])?$setting[$data['client_name']]:''}}</td>
+                                <td>{{isset($setting[$data['model']])?$setting[$data['model']]:''}}</td>
+                                <td>{{isset($setting[$data['brand']])?$setting[$data['brand']]:''}}</td>
+                                <td>{{$data['operator']}}</td>
                                 <td>{{$data['earn_money']}}</td>
+
                             </tr>
                         @endforeach
 
