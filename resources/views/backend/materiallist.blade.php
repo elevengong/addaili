@@ -23,6 +23,7 @@
                             <th width="50">广告用户ID</th>
                             <th width="50">广告用户帐号</th>
                             <th width="100">创意图</th>
+                            <th width="100">创意图(base64)</th>
                             <th width="50">状态</th>
                             <th width="50">尺寸</th>
                             <th width="50">大小</th>
@@ -38,6 +39,7 @@
                                 <td>{{$material['member_id']}}</td>
                                 <td>{{$material['name']}}</td>
                                 <td><a href="{{$website_domain[0]['value']}}{{$material['image']}}" target="_blank"><img src="{{$website_domain[0]['value']}}{{$material['image']}}" width="90"></a></td>
+                                <td><img src="{{$material['base64']}}" width="90"></td>
                                 <td>@if($material['status']==0)审核中@elseif($material['status']==1)已审核@elseif($material['status']==2)不通过@endif</td>
                                 <td>{{$material['size']}}</td>
                                 <td>{{$material['filesize']}}</td>

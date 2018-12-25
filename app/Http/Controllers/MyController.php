@@ -68,6 +68,12 @@ class MyController extends Controller
 
     }
 
+    //图片生成base64
+    protected function ImageBase64($image_file){
+        $image_info = getimagesize($image_file);
+        $base64_image_content = "data:{$image_info['mime']};base64," . base64_encode(file_get_contents($image_file));
+        return $base64_image_content;
+    }
 
     //上传图片
     public function uploadphoto(Request $request,$id){

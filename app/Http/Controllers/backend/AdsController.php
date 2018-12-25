@@ -51,7 +51,7 @@ class AdsController extends MyController
     }
 
     public function materiallist(Request $request){
-        $website_domain = CommonSetting::where('name','website_domain')->get()->toArray();
+        $website_domain = CommonSetting::where('name','ads_material_domain')->get()->toArray();
 
         if($request->isMethod('post')){
 
@@ -69,7 +69,26 @@ class AdsController extends MyController
         if($request->isMethod('post')){
             $id = request()->input('id');
             $status = request()->input('status');
-            $res = Material::where('id',$id)->update(['status'=> $status]);
+            if($status == 1)
+            {
+                //生成base64图片
+                $material = @Material::find($id)->toArray();
+                if(!empty($material))
+                {
+                    $website_image_domain = CommonSetting::where('name','ads_material_domain')->get()->toArray();
+                    $image_url = $website_image_domain[0]['value'].$material['image'];
+                    $image_base64 = $this->ImageBase64($image_url);
+
+                }else{
+                    $data['status'] = 0;
+                    $data['msg'] = "Error!";
+                    echo json_encode($data);
+                }
+
+                $res = Material::where('id',$id)->update(['status'=> $status,'base64'=>$image_base64]);
+            }else{
+                $res = Material::where('id',$id)->update(['status'=> $status]);
+            }
             if ($res) {
                 $data['status'] = 1;
                 $data['msg'] = "修改成功";
