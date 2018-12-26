@@ -32,6 +32,8 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/static/addstatic','backend\StaticController@addstatic');
     Route::any('/backend/static/editstatic/{set_id}','backend\StaticController@editstatic')->where(['set_id' => '[0-9]+']);
 
+    Route::any('/backend/static/resetapi','backend\StaticController@resetapi');
+
     //广告会员列表和站长列表
     Route::any('/backend/member/adsmember','backend\MemberController@adsmemberlist');
     Route::any('/backend/member/sitemember','backend\MemberController@sitememberlist');

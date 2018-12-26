@@ -72,4 +72,13 @@ class StaticController extends MyController
         }
     }
 
+    public function resetapi(Request $request){
+        if($request->isMethod('post'))
+        {
+            
+        }else{
+            return view('backend.resetapi');
+        }
+    }
+
 }

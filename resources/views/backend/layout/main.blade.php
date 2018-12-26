@@ -76,6 +76,7 @@
                     <li><a data-href="{{url('/backend/adminlist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="管理员列表">后台管理员列表</a></li>
                     <li><a data-href="{{url('/backend/static')}}" href="javascript:void(0)" onclick="clicklink(this)" title="Common属性设置">Common属性设置</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="核心属性设置">核心属性设置</a></li>
+                    <li><a data-href="{{url('/backend/static/resetapi')}}" href="javascript:void(0)" onclick="clicklink(this)" title="重设API">重设API</a></li>
                 </ul>
             </dd>
 
