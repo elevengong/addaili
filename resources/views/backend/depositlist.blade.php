@@ -25,8 +25,10 @@
                             <th width="50">充值金额</th>
                             <th width="50">订单号</th>
                             <th width="50">支付类型</th>
-                            <th width="50">支付帐号</th>
-                            <th width="50">帐号名</th>
+                            <th width="50">收款银行</th>
+                            <th width="50">收款帐号</th>
+                            <th width="50">收款人</th>
+                            <th width="50">付款人</th>
                             <th width="50">支付IP</th>
                             <th width="50">状态</th>
                             <th width="100">备注</th>
@@ -42,9 +44,11 @@
                                 <td>{{$data['name']}}</td>
                                 <td>{{$data['money']}}</td>
                                 <td>{{$data['order_no']}}</td>
-                                <td>{{$data['value']}}</td>
-                                <td>{{$data['payaccount']}}</td>
+                                <td>@if($data['type']==1)银行转帐@elseif($data['type']==2)支付宝转帐@else微信转帐@endif</td>
+                                <td>{{$data['bank']}}</td>
+                                <td>{{$data['account_number']}}</td>
                                 <td>{{$data['account_name']}}</td>
+                                <td>{{$data['payer_account_name']}}</td>
                                 <td>{{$data['pay_ip']}}</td>
                                 <td>等待处理</td>
                                 <td>{{$data['remark']}}</td>

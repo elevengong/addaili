@@ -46,19 +46,31 @@
         <div class="col-xs-12 row cl">
             <label class="form-label col-xs-3 col-sm-3">支付类型：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$DepositDetail[0]['value']}}
+                @if($DepositDetail[0]['type']==1)银行转帐@elseif($DepositDetail[0]['type']==2)支付宝转帐@else微信转帐@endif
             </div>
         </div>
         <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">支付帐号：</label>
+            <label class="form-label col-xs-3 col-sm-3">收款银行：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
-                {{$DepositDetail[0]['payaccount']}}
+                {{$DepositDetail[0]['bank']}}
             </div>
         </div>
         <div class="col-xs-12 row cl">
-            <label class="form-label col-xs-3 col-sm-3">帐号名：</label>
+            <label class="form-label col-xs-3 col-sm-3">收款帐号：</label>
+            <div class="col-xs-9 col-sm-9" style="text-align: left;">
+                {{$DepositDetail[0]['account_number']}}
+            </div>
+        </div>
+        <div class="col-xs-12 row cl">
+            <label class="form-label col-xs-3 col-sm-3">收款人：</label>
             <div class="col-xs-9 col-sm-9" style="text-align: left;">
                 {{$DepositDetail[0]['account_name']}}
+            </div>
+        </div>
+        <div class="col-xs-12 row cl">
+            <label class="form-label col-xs-3 col-sm-3">付款人：</label>
+            <div class="col-xs-9 col-sm-9" style="text-align: left;">
+                {{$DepositDetail[0]['payer_account_name']}}
             </div>
         </div>
         <div class="col-xs-12 row cl">
@@ -99,7 +111,7 @@
 
         <div class="col-xs-12 row cl" style="text-align: center;">
             <div class="formControls col-xs-12 col-sm-12">
-                <input type="button" onclick="updatedepositorder({{$DepositDetail[0]['deposit_id']}},{{$DepositDetail[0]['member_id']}})" class="btn btn-primary" value="更新充值订单" id="btn_add_ok" />
+                <input type="button" onclick="updatedepositorder('{{$DepositDetail[0]['deposit_id']}}','{{$DepositDetail[0]['member_id']}}')" class="btn btn-primary" value="更新充值订单" id="btn_add_ok" />
             </div>
         </div>
 

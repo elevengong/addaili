@@ -47,8 +47,10 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/money/applydeposit','backend\DepositController@applydeposit');
     Route::get('/backend/money/dealdepositorder/{deposit_id}','backend\DepositController@dealdepositorder')->where(['deposit_id' => '[0-9]+']);
     Route::any('/backend/money/updatedepositorder/{deposit_id}','backend\DepositController@updatedepositorder')->where(['deposit_id' => '[0-9]+']);
-
     Route::any('/backend/money/deposit','backend\DepositController@depositrecord');
+
+    //帐变
+    Route::any('/backend/money/moneychange','backend\MoneyController@moneychange');
 
     //广告素材管理
     Route::any('/backend/ads/materiallist','backend\AdsController@materiallist');

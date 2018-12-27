@@ -140,6 +140,7 @@
                     <li><a data-href="{{url('/backend/money/deposit')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告会员充值记录">广告会员充值记录</a></li>
                     <li><a data-href="{{url('/backend/money/applywithdraw')}}" href="javascript:void(0)" onclick="clicklink(this)" title="提款审核">提款审核(人工)</a></li>
                     <li><a data-href="{{url('/backend/money/withdraw')}}" href="javascript:void(0)" onclick="clicklink(this)" title="网站会员提款记录">网站会员提款记录</a></li>
+                    <li><a data-href="{{url('/backend/money/moneychange')}}" href="javascript:void(0)" onclick="clicklink(this)" title="帐变">帐变</a></li>
                 </ul>
             </dd>
 

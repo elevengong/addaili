@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Model\AccountChange;
 use App\Model\MemberBalance;
 use App\Model\Withdraw;
 use App\Model\Member;
@@ -88,6 +89,7 @@ class WithdrawController extends MyController
                         exit;
                     }
                     $result = Withdraw::where('withdraw_id', $withdraw_id)->update(['status' => $status, 'remark' => $remark]);
+
                     $result1 = Member::where('member_id',$OrderDetail[0]['member_id'])->decrement('frozen',$OrderDetail[0]['money']);
                     if($result and $result1)
                     {
@@ -128,9 +130,23 @@ class WithdrawController extends MyController
                         exit;
                     }
                     $result = Withdraw::where('withdraw_id', $withdraw_id)->update(['status' => $status, 'remark' => $remark]);
+
+                    //帐变
+                    $accountChange = array();
+                    $accountChange['memberId'] = $OrderDetail[0]['member_id'];
+                    $accountChange['acType'] ='171';
+                    $accountChange['moreorless'] = 1;
+                    $accountChange['balanceBeforeChange'] = $MemberBalance[0]['balance'];
+                    $accountChange['balance'] = $MemberBalance[0]['balance']+$OrderDetail[0]['money'];
+                    $accountChange['remark'] = '站长提款后台取消';
+                    $accountChange['details'] = '';
+                    $accountChange['time'] = date('Y-m-d H:i:s',time());
+                    $accountChange['relateId'] = $withdraw_id;
+                    $result3 = AccountChange::create($accountChange);
+
                     $result1 = MemberBalance::where('id',$OrderDetail[0]['member_id'])->increment('balance',$OrderDetail[0]['money']);
                     $result2 = Member::where('member_id',$OrderDetail[0]['member_id'])->decrement('frozen',$OrderDetail[0]['money']);
-                    if($result and $result1 and $result2)
+                    if($result and $result1 and $result2 and !empty($result3->id))
                     {
                         DB::commit();
                         $data['status'] = 1;

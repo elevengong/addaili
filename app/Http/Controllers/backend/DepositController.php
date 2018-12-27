@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Model\AccountChange;
 use App\Model\Deposit;
 use App\Model\Member;
 use App\Model\MemberBalance;
@@ -17,22 +18,16 @@ class DepositController extends MyController
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
-            $DepositArray = Deposit::select('deposit.*','member.name','common_setting.value')->where('deposit.status',0)
+            $DepositArray = Deposit::select('deposit.*','member.name')->where('deposit.status',0)
                 ->leftJoin('member',function ($join){
                     $join->on('member.member_id','=','deposit.member_id');
-                })
-                ->leftJoin('common_setting',function ($join){
-                    $join->on('common_setting.common_set_id','=','deposit.paytype_id');
                 })
                 ->where('member.name','like',$member . '%')
                 ->orderBy('deposit.created_at', 'desc')->paginate($this->backendPageNum);
         }else{
-            $DepositArray = Deposit::select('deposit.*','member.name','common_setting.value')->where('deposit.status',0)
+            $DepositArray = Deposit::select('deposit.*','member.name')->where('deposit.status',0)
                 ->leftJoin('member',function ($join){
                     $join->on('member.member_id','=','deposit.member_id');
-                })
-                ->leftJoin('common_setting',function ($join){
-                    $join->on('common_setting.common_set_id','=','deposit.paytype_id');
                 })
                 ->orderBy('deposit.created_at', 'desc')->paginate($this->backendPageNum);
         }
@@ -41,12 +36,9 @@ class DepositController extends MyController
 
     //处理广告商充值订单
     public function dealdepositorder(Request $request,$deposit_id){
-        $DepositDetail = Deposit::select('deposit.*','member.name','common_setting.value')->where('deposit.deposit_id',$deposit_id)
+        $DepositDetail = Deposit::select('deposit.*','member.name')->where('deposit.deposit_id',$deposit_id)
             ->leftJoin('member',function ($join){
                 $join->on('member.member_id','=','deposit.member_id');
-            })
-            ->leftJoin('common_setting',function ($join){
-                $join->on('common_setting.common_set_id','=','deposit.paytype_id');
             })->get()->toArray();
         return view('backend.dealdepositorder', compact('DepositDetail'));
     }
@@ -68,9 +60,24 @@ class DepositController extends MyController
                     $MemberBalance = MemberBalance::where('id',$member_id)->lockForUpdate()->get()->toArray();
 
                     $result = Deposit::where('deposit_id', $deposit_id)->update(['status' => $status, 'remark' => $remark]);
+
+                    //帐变
+                    $accountChange = array();
+                    $accountChange['memberId'] = $member_id;
+                    $accountChange['acType'] ='157';
+                    $accountChange['moreorless'] = 1;
+                    $accountChange['balanceBeforeChange'] = $MemberBalance[0]['balance'];
+                    $accountChange['balance'] = $MemberBalance[0]['balance']+$OrderDetail[0]['money'];
+                    $accountChange['remark'] = '广告商充值';
+                    $accountChange['details'] = '';
+                    $accountChange['time'] = date('Y-m-d H:i:s',time());
+                    $accountChange['relateId'] = $deposit_id;
+                    $result2 = AccountChange::create($accountChange);
+
                     $result1 = MemberBalance::where('id',$OrderDetail[0]['member_id'])->increment('balance',$OrderDetail[0]['money']);
 
-                    if($result and $result1)
+
+                    if($result and $result1 and !empty($result2->id))
                     {
                         DB::commit();
                         $data['status'] = 1;
@@ -108,23 +115,17 @@ class DepositController extends MyController
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
-            $DepositArray = Deposit::select('deposit.*','member.name','common_setting.value')->where('deposit.status','!=','0')
+            $DepositArray = Deposit::select('deposit.*','member.name')->where('deposit.status','!=','0')
                 ->leftJoin('member',function ($join){
                     $join->on('member.member_id','=','deposit.member_id');
-                })
-                ->leftJoin('common_setting',function ($join){
-                    $join->on('common_setting.common_set_id','=','deposit.paytype_id');
                 })
                 ->where('member.name','like',$member . '%')
                 ->orderBy('deposit.updated_at', 'desc')->paginate($this->backendPageNum);
 
         }else{
-            $DepositArray = Deposit::select('deposit.*','member.name','common_setting.value')->where('deposit.status','!=','0')
+            $DepositArray = Deposit::select('deposit.*','member.name')->where('deposit.status','!=','0')
                 ->leftJoin('member',function ($join){
                     $join->on('member.member_id','=','deposit.member_id');
-                })
-                ->leftJoin('common_setting',function ($join){
-                    $join->on('common_setting.common_set_id','=','deposit.paytype_id');
                 })
                 ->orderBy('deposit.updated_at', 'desc')->paginate($this->backendPageNum);
         }
