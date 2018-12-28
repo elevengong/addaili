@@ -21,7 +21,7 @@
 <script type="text/javascript" src="<?php echo asset( "/resources/views/backend/js/My97DatePicker/4.8/WdatePicker.js"); ?>"></script>
 <script type="text/javascript" src="<?php echo asset( "/resources/views/backend/js/layer/layer.js") ?>"></script>
 
-<script type="text/javascript" src="<?php echo asset( "/resources/views/backend/js/include/static.js?ver=1.0"); ?>"></script>
+<script type="text/javascript" src="<?php echo asset( "/resources/views/backend/js/include/member.js?ver=1.0"); ?>"></script>
 <div id="frm_account" class="col-xs-12" style="text-align: center;">
     <form class="form form-horizontal" id="form1">
         {{csrf_field()}}
