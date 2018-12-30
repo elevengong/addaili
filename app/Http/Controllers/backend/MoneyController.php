@@ -29,4 +29,13 @@ class MoneyController extends MyController
             return view('backend.moneychangelist', compact('moneyChangeArray','acType'))->with('admin', session('admin'));
         }
     }
+
+    //站长业绩
+    public function webmasterearn(Request $request){
+        if($request->isMethod('post')){
+
+        }else{
+            return view('backend.webmasterearn');
+        }
+    }
 }

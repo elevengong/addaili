@@ -57,14 +57,15 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::post('/backend/material/updatestatus','backend\AdsController@updatematerialstatus');
 
     //站长
-     Route::any('/backend/sitemember/adslist','backend\SitememberController@adslist');
+    Route::any('/backend/sitemember/adslist','backend\SitememberController@adslist');
 
     Route::any('/backend/money/applywithdraw','backend\WithdrawController@applywithdraw');
     Route::get('/backend/money/dealwithdraworder/{withdraw_id}','backend\WithdrawController@dealwithdraworder')->where(['withdraw_id' => '[0-9]+']);
     Route::any('/backend/money/updatewithdraworder/{withdraw_id}','backend\WithdrawController@updatewithdraworder')->where(['withdraw_id' => '[0-9]+']);
 
-
     Route::any('/backend/money/withdraw','backend\WithdrawController@withdrawrecord');
+
+    Route::any('/backend/money/webmasterearn','backend\MoneyController@webmasterearn');
 
 
     //审核站长网站列表
@@ -77,6 +78,12 @@ Route::group(['middleware' => ['web','admin.login']],function () {
 
     //运营数据管理
     Route::any('/backend/management/traffic','backend\TrafficController@traffic');
+    Route::any('/backend/today/webmasterlist','backend\TodayController@webmasterlist');
+    Route::any('/backend/today/webmasteradslist','backend\TodayController@webmasteradslist');
+    Route::any('/backend/today/webmastermoneycontrast','backend\TodayController@webmastermoneycontrast');
+    Route::any('/backend/today/webmasterdatacontrast','backend\TodayController@webmasterdatacontrast');
+    Route::any('/backend/today/webmasteradscontrast','backend\TodayController@webmasteradscontrast');
+    Route::any('/backend/today/browseranalysis','backend\TodayController@browseranalysis');
 
     //图片上传
     Route::any('/backend/upload','backend\JobController@upload');
