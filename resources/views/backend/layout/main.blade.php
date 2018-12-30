@@ -77,6 +77,7 @@
                     <li><a data-href="{{url('/backend/static')}}" href="javascript:void(0)" onclick="clicklink(this)" title="Common属性设置">Common属性设置</a></li>
                     <li><a data-href="{{url('#')}}" href="javascript:void(0)" onclick="clicklink(this)" title="核心属性设置">核心属性设置</a></li>
                     <li><a data-href="{{url('/backend/static/resetapi')}}" href="javascript:void(0)" onclick="clicklink(this)" title="重设API">重设API</a></li>
+                    <li><a data-href="{{url('/backend/member/message')}}" href="javascript:void(0)" onclick="clicklink(this)" title="消息发布">消息发布</a></li>
                 </ul>
             </dd>
 
@@ -91,6 +92,7 @@
                     <li><a data-href="{{url('/backend/ads/verifylist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="域名列表">域名列表</a></li>
                     <li><a data-href="{{url('/backend/sitemember/adslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="广告位列表">广告位列表</a></li>
                     <li><a data-href="{{url('/backend/money/webmasterearn')}}" href="javascript:void(0)" onclick="clicklink(this)" title="站长业绩">站长业绩</a></li>
+
 
                 </ul>
             </dd>
