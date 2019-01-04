@@ -22,6 +22,7 @@
                         <tr class="text-c">
                             <th width="50">ID</th>
                             <th width="50">站长</th>
+                            <th width="50">VIP等级</th>
                             <th width="50">QQ</th>
                             <th width="50">手机</th>
                             <th width="50">余额</th>
@@ -39,6 +40,7 @@
                             <tr class="text-c">
                                 <td>{{$data['member_id']}}</td>
                                 <td>{{$data['name']}}</td>
+                                <td>{{$setting[$data['vip']]}}</td>
                                 <td>{{$data['qq']}}</td>
                                 <td>{{$data['mobile']}}</td>
                                 <td>{{$data['balance']}}</td>

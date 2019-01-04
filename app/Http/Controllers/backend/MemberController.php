@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Model\Member;
+use App\Model\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\MyController;
 use Crypt;
@@ -30,6 +31,12 @@ class MemberController extends MyController
     }
 
     public function sitememberlist(Request $request){
+        $settingArray = Setting::where('settinggroup','vip')->get()->toArray();
+        $setting = array();
+        foreach ($settingArray as $set)
+        {
+            $setting[$set['set_id']] = $set['remark'];
+        }
         if($request->isMethod('post'))
         {
             $member = request()->input('member');
@@ -45,7 +52,7 @@ class MemberController extends MyController
                 })
                 ->where('member.type',2)->orderBy('member.member_id', 'asc')->paginate($this->backendPageNum);
         }
-        return view('backend.sitemember', compact('MemberArray'))->with('admin', session('admin'));
+        return view('backend.sitemember', compact('MemberArray','setting'))->with('admin', session('admin'));
     }
 
     public function changememberstatus(Request $request){
