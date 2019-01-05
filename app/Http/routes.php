@@ -80,6 +80,7 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     Route::any('/backend/management/traffic','backend\TrafficController@traffic');
     Route::any('/backend/today/webmasterlist','backend\TodayController@webmasterlist');
     Route::any('/backend/today/webmasteradslist','backend\TodayController@webmasteradslist');
+    Route::any('/backend/today/adsmemberadslist','backend\TodayController@adsmemberadslist');
     Route::any('/backend/today/webmastermoneycontrast','backend\TodayController@webmastermoneycontrast');
     Route::any('/backend/today/webmasterdatacontrast','backend\TodayController@webmasterdatacontrast');
     Route::any('/backend/today/webmasteradscontrast','backend\TodayController@webmasteradscontrast');

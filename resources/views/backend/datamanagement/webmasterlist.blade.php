@@ -6,9 +6,15 @@
             <article class="cl pd-20">
 
                 <div class="text-c">
-                    <form id="frm_admin" action="#" method="post" >
+                    <form id="frm_admin" action="/backend/today/webmasterlist" method="post" >
                         {{csrf_field()}}
-                        <input type="text" class="input-text" style="width:250px" placeholder="输入站长" id="member" name="member" value="">
+                        日期范围：
+                        <input type="text" name="stime" value="{{date('Y-m-d'),time()}}" id="stime" class="input-text" style="width:100px">
+                        至
+                        <input type="text" name="etime" value="{{date('Y-m-d'),time()}}" id="etime" class="input-text" style="width:100px">
+                        &nbsp;
+                        <input type="text" class="input-text" style="width:200px" placeholder="输入站长ID" id="mid" name="mid" value="">
+
                         <button type="submit" class="btn btn-success radius" id="btn_seach" name="btn_seach">
                             <i class="Hui-iconfont">&#xe665;</i> 搜
                         </button>
@@ -68,8 +74,16 @@
         <hr />
 
     </section>
-    <script>
+    <script src="<?php echo asset( "/resources/views/backend/js/laydate/laydate.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo asset( "/resources/views/backend/js/baseCheck.js?ver=1.0") ?>" type="text/javascript"></script>
 
+    <script>
+        laydate.render({
+            elem: '#stime'
+        });
+        laydate.render({
+            elem: '#etime'
+        });
     </script>
 
 
