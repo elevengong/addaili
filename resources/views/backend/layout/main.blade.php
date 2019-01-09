@@ -118,6 +118,7 @@
             <dd style="display: none">
                 <ul>
                     <li><a data-href="{{url('/backend/today/webmasterlist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投站长">在投站长</a></li>
+                    <li><a data-href="{{url('/backend/today/adsmemberlist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投广告商">在投广告商</a></li>
                     <li><a data-href="{{url('/backend/today/webmasteradslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投广告位">在投广告位</a></li>
                     <li><a data-href="{{url('/backend/today/adsmemberadslist')}}" href="javascript:void(0)" onclick="clicklink(this)" title="在投广告">在投广告</a></li>
                     <li><a data-href="{{url('/backend/today/webmastermoneycontrast')}}" href="javascript:void(0)" onclick="clicklink(this)" title="24小时计费图（按站长）">24小时计费图（按站长）</a></li>

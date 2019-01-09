@@ -12,23 +12,70 @@ class TodayController extends MyController
 {
     //在投站长
     public function webmasterlist(Request $request){
-        if($request->isMethod('post')){
-            $stime = request()->input('stime');
-            $etime = request()->input('etime');
+        $stime = !empty(request()->input('stime')) ? request()->input('stime'):date('Y-m-d',time());
+        $etime = !empty(request()->input('etime')) ? request()->input('etime'):date('Y-m-d',time());
+        $webmasterid = request()->input('webmasterid');
 
-            $webmasterEarnArray = SumSpace::select('sum_space.*','webmaster_apply_ads.webmaster_id')
-                ->leftJoin('webmaster_apply_ads',function ($join){
-                    $join->on('webmaster_apply_ads.webmaster_ads_id','=','sum_space.space_id');
-                })
-                ->where('sum_space.date',$stime)->where('pv','!=',0)
-                ->get()->toArray();
+        $webmasterEarnArray = SumSpace::select(
+            array(
+                \DB::raw('SUM(sum_space.earn) as totalEarn'),
+                \DB::raw('SUM(sum_space.pv) as totalPv'),
+                \DB::raw('SUM(sum_space.ip) as totalIp'),
+                \DB::raw('SUM(sum_space.click) as totalClick'),
+                \DB::raw('SUM(sum_space.click_ip) as totalClickIp'),
+                \DB::raw('SUM(sum_space.view) as totalView'),
+                'sum_space.webmaster_id',
+                'member.name'
+            )
+        )->leftJoin('member',function ($join){
+            $join->on('member.member_id','=','sum_space.webmaster_id');
+        })
+            ->where(function($query) use($request){
 
+                $webmasterid = request()->input('webmasterid');
+                if(!empty($webmasterid))
+                {
+                    $query->where('sum_space.webmaster_id',$webmasterid);
+                }
 
+            })
+            ->where('sum_space.date','>=',$stime)->where('sum_space.date','<=',$etime)->groupBy('sum_space.webmaster_id')->paginate($this->backendPageNum);
 
-            return view('backend.datamanagement.webmasterlist');
-        }else{
-            return view('backend.datamanagement.webmasterlist');
-        }
+        return view('backend.datamanagement.webmasterlist',compact('webmasterEarnArray','stime','etime','webmasterid'));
+    }
+
+    //在投广告商
+    public function adsmemberlist(Request $request){
+        $stime = !empty(request()->input('stime')) ? request()->input('stime'):date('Y-m-d',time());
+        $etime = !empty(request()->input('etime')) ? request()->input('etime'):date('Y-m-d',time());
+        $adsmemberid = request()->input('adsmemberid');
+
+        $adsmemberSpentArray = SumAds::select(
+            array(
+                \DB::raw('SUM(sum_ads.spant) as totalSpent'),
+                \DB::raw('SUM(sum_ads.pv) as totalPv'),
+                \DB::raw('SUM(sum_ads.ip) as totalIp'),
+                \DB::raw('SUM(sum_ads.click) as totalClick'),
+                \DB::raw('SUM(sum_ads.click_ip) as totalClickIp'),
+                \DB::raw('SUM(sum_ads.view) as totalView'),
+                'sum_ads.adsmember_id',
+                'member.name'
+            )
+        )->leftJoin('member',function ($join){
+            $join->on('member.member_id','=','sum_ads.adsmember_id');
+        })
+            ->where(function($query) use($request){
+
+                $adsmemberid = request()->input('adsmemberid');
+                if(!empty($adsmemberid))
+                {
+                    $query->where('sum_ads.adsmember_id',$adsmemberid);
+                }
+
+            })
+            ->where('sum_ads.date','>=',$stime)->where('sum_ads.date','<=',$etime)->groupBy('sum_ads.adsmember_id')->paginate($this->backendPageNum);
+
+        return view('backend.datamanagement.adsmemberlist',compact('adsmemberSpentArray','stime','etime','adsmemberid'));
     }
 
     //在投广告位

@@ -79,6 +79,7 @@ Route::group(['middleware' => ['web','admin.login']],function () {
     //运营数据管理
     Route::any('/backend/management/traffic','backend\TrafficController@traffic');
     Route::any('/backend/today/webmasterlist','backend\TodayController@webmasterlist');
+    Route::any('/backend/today/adsmemberlist','backend\TodayController@adsmemberlist');
     Route::any('/backend/today/webmasteradslist','backend\TodayController@webmasteradslist');
     Route::any('/backend/today/adsmemberadslist','backend\TodayController@adsmemberadslist');
     Route::any('/backend/today/webmastermoneycontrast','backend\TodayController@webmastermoneycontrast');
