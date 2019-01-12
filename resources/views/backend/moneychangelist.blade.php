@@ -46,7 +46,7 @@
                                 <td>{{$data['remark']}}</td>
                                 <td>{{$data['details']}}</td>
                                 <td>{{$data['relateId']}}</td>
-                                <td>{{$data['created_at']}}</td>
+                                <td>{{$data['time']}}</td>
                             </tr>
                         @endforeach
 
